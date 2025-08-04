@@ -37,20 +37,31 @@ Execution → T1059.001 (PowerShell)
 Persistence → T1547 (Registry Run Keys)
 
 Outcome
-Incident created in Sentinel<img width="972" height="301" alt="VM powershell stimulation" src="https://github.com/user-attachments/assets/009d730d-bf49-4228-b56c-d0b5da24c610" />
 
 Alert fired in Defender
 Attack linked to specific VM
 Detection rule ran every 5 minutes
 Full visibility, traceability, and response workflow achieved
 
-Screenshots 📸
-<img width="1727" height="591" alt="Sentinel Incident tab" src="https://github.com/user-attachments/assets/1a7628ca-2247-425a-bde7-de1d4a256d1a" />
-<img width="957" height="780" alt="Analytical Rule" src="https://github.com/user-attachments/assets/17231e2a-2b38-4ec7-9a62-34b931dfd429" />
-<img width="924" height="838" alt="Analytical Rule with MITRE Tagging" src="https://github.com/user-attachments/assets/60d8147c-5a0f-4040-a7b2-c9dc7041e157" />
-<img width="1719" height="504" alt="VM " src="https://github.com/user-attachments/assets/c712f9da-2260-4fef-a171-d07bbb0da94c" />
-![Uploading VM powershell stimulation.png…]()
-<img width="1667" height="722" alt="KQL Detection Log Result" src="https://github.com/user-attachments/assets/21e03d7b-3d52-4440-aa39-71e8322b244a" />
+Screenshots 
+Sentinel Incident
+<img width="1727" height="591" alt="Sentinel Incident tab" src="https://github.com/user-attachments/assets/c7573854-94cd-4505-8ac7-5e674a18fb06" />
+
+Defender Device Inventory
+<img width="1719" height="504" alt="VM " src="https://github.com/user-attachments/assets/9fcb7fcd-85c9-4761-9343-ceef452f7fa0" />
+
+VM PowerShell Simulation
+<img width="972" height="301" alt="VM powershell stimulation" src="https://github.com/user-attachments/assets/6b5111c3-3921-403b-87c9-64821123e482" />
+
+KQL Detection Log Result
+<img width="1667" height="722" alt="KQL Detection Log Result" src="https://github.com/user-attachments/assets/c7713c09-2888-4604-a6ce-5aee9168da33" />
+
+Analytics Rule w/ MITRE Tagging
+<img width="924" height="838" alt="Analytical Rule with MITRE Tagging" src="https://github.com/user-attachments/assets/88de26ad-0faf-4c35-bea8-d4b87ae46ed9" />
+
+
+
+
 
 
 Summary
