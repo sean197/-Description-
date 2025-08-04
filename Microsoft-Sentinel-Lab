@@ -1,0 +1,60 @@
+TITLE:
+Microsoft Sentinel Threat Detection Lab — PowerShell Attack
+
+OBJECTIVE:
+Simulate a real-world attack and detect it using Microsoft Sentinel and Defender XDR.
+
+TOOLS USED:
+Microsoft Sentinel
+Microsoft Defender for Endpoint P2
+Azure Virtual Machine (Windows 11)
+KQL (Kusto Query Language)
+PowerShell (Attack Simulation)
+
+ATTACK SIMULATED:
+Disabled Defender, set persistence using obfuscated PowerShell:
+Set-MpPreference -DisableRealtimeMonitoring $true
+Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name "Updater" -Value "powershell.exe -w hidden -enc UwB0AGEAcgB0AC0AUwBsAGUAZQBwACAAMQA=" -Force
+Start-Process powershell.exe -ArgumentList "-w hidden -enc UwB0AGEAcgB0AC0AUwBsAGUAZQBwACAAMQA="
+Set-MpPreference -DisableRealtimeMonitoring $false
+
+
+DETECTION — KQL ANALYTIC RULE:
+DeviceProcessEvents
+| where FileName == "powershell.exe"
+| where ProcessCommandLine contains "Start-Sleep" or ProcessCommandLine contains "-enc"
+| sort by Timestamp desc
+
+
+INCIDENT RESULT:
+Sentinel detected the attack and triggered an incident.
+Defender XDR also flagged the VM with a security alert.
+
+
+Screenshots 
+Sentinel Incident
+<img width="1727" height="591" alt="Sentinel Incident tab" src="https://github.com/user-attachments/assets/c7573854-94cd-4505-8ac7-5e674a18fb06" />
+
+Defender Device Inventory
+<img width="1719" height="504" alt="VM " src="https://github.com/user-attachments/assets/9fcb7fcd-85c9-4761-9343-ceef452f7fa0" />
+
+VM PowerShell Simulation
+<img width="972" height="301" alt="VM powershell stimulation" src="https://github.com/user-attachments/assets/6b5111c3-3921-403b-87c9-64821123e482" />
+
+KQL Detection Log Result
+<img width="1667" height="722" alt="KQL Detection Log Result" src="https://github.com/user-attachments/assets/c7713c09-2888-4604-a6ce-5aee9168da33" />
+
+Analytics Rule w/ MITRE Tagging
+<img width="924" height="838" alt="Analytical Rule with MITRE Tagging" src="https://github.com/user-attachments/assets/88de26ad-0faf-4c35-bea8-d4b87ae46ed9" />
+
+
+
+
+
+
+Summary
+This lab proves SOC Tier 1/2 skills in detection, hunting, and incident response using Microsoft’s security stack. Fully repeatable, validated, and publicly documented.
+
+License
+MIT — Free to use, fork, improve.
+
