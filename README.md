@@ -1,5 +1,69 @@
-Tools Used: Azure VM, Defender, Sentinel, KQL, Logic App (if used)
-Objective: Detect obfuscated PowerShell persistence using Sentinel.
-Attack Simulation: Describe your PowerShell script.
-Detection: Include KQL query.
-Incident Generation: Screenshot proof.
+TITLE:
+Microsoft Sentinel Threat Detection Lab — PowerShell Attack
+
+
+
+OBJECTIVE:
+Simulate a real-world attack and detect it using Microsoft Sentinel and Defender XDR.
+
+
+
+TOOLS USED:
+Microsoft Sentinel
+Microsoft Defender for Endpoint P2
+Azure Virtual Machine (Windows 11)
+KQL (Kusto Query Language)
+PowerShell (Attack Simulation)
+
+
+
+ATTACK SIMULATED:
+Disabled Defender, set persistence using obfuscated PowerShell:
+Set-MpPreference -DisableRealtimeMonitoring $true
+Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name "Updater" -Value "powershell.exe -w hidden -enc UwB0AGEAcgB0AC0AUwBsAGUAZQBwACAAMQA=" -Force
+Start-Process powershell.exe -ArgumentList "-w hidden -enc UwB0AGEAcgB0AC0AUwBsAGUAZQBwACAAMQA="
+Set-MpPreference -DisableRealtimeMonitoring $false
+
+
+
+DETECTION — KQL ANALYTIC RULE:
+DeviceProcessEvents
+| where FileName == "powershell.exe"
+| where ProcessCommandLine contains "Start-Sleep" or ProcessCommandLine contains "-enc"
+| sort by Timestamp desc
+
+
+
+INCIDENT RESULT:
+Sentinel detected the attack and triggered an incident.
+Defender XDR also flagged the VM with a security alert.
+
+
+
+Screenshots 
+Sentinel Incident
+<img width="1727" height="591" alt="Sentinel Incident tab" src="https://github.com/user-attachments/assets/c7573854-94cd-4505-8ac7-5e674a18fb06" />
+
+
+Defender Device Inventory
+<img width="1719" height="504" alt="VM " src="https://github.com/user-attachments/assets/9fcb7fcd-85c9-4761-9343-ceef452f7fa0" />
+
+
+VM PowerShell Simulation
+<img width="972" height="301" alt="VM powershell stimulation" src="https://github.com/user-attachments/assets/6b5111c3-3921-403b-87c9-64821123e482" />
+
+
+KQL Detection Log Result
+<img width="1667" height="722" alt="KQL Detection Log Result" src="https://github.com/user-attachments/assets/c7713c09-2888-4604-a6ce-5aee9168da33" />
+
+
+Analytics Rule w/ MITRE Tagging
+<img width="957" height="780" alt="Analytical Rule" src="https://github.com/user-attachments/assets/5e959816-e355-4a68-a38d-3fecbf1faaeb" />
+
+
+<img width="924" height="838" alt="Analytical Rule with MITRE Tagging" src="https://github.com/user-attachments/assets/88de26ad-0faf-4c35-bea8-d4b87ae46ed9" />
+
+
+
+Summary
+This lab proves kills in detection, hunting, and incident response using Microsoft’s security stack. 
