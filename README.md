@@ -1,4 +1,4 @@
-TITLE:
+TITLE:  
 Microsoft Sentinel Threat Detection Lab — PowerShell Attack
 
 
