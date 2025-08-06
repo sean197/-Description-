@@ -1,14 +1,14 @@
-TITLE:  
+TITLE  
 Microsoft Sentinel Threat Detection Lab — PowerShell Attack
 
 
 
-OBJECTIVE:
+OBJECTIVE  
 Simulate a real-world attack and detect it using Microsoft Sentinel and Defender XDR.
 
 
 
-TOOLS USED:
+TOOLS USED  
 Microsoft Sentinel
 Microsoft Defender for Endpoint P2
 Azure Virtual Machine (Windows 11)
@@ -17,8 +17,7 @@ PowerShell (Attack Simulation)
 
 
 
-ATTACK SIMULATED:  
-
+ATTACK SIMULATED  
 Disabled Defender, set persistence using obfuscated PowerShell:
 Set-MpPreference -DisableRealtimeMonitoring $true
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name "Updater" -Value "powershell.exe -w hidden -enc UwB0AGEAcgB0AC0AUwBsAGUAZQBwACAAMQA=" -Force
@@ -27,8 +26,7 @@ Set-MpPreference -DisableRealtimeMonitoring $false
 
 
 
-DETECTION— KQL ANALYTIC RULE:  
-
+DETECTION— KQL ANALYTIC RULE  
 DeviceProcessEvents
 | where FileName == "powershell.exe"
 | where ProcessCommandLine contains "Start-Sleep" or ProcessCommandLine contains "-enc"
@@ -36,7 +34,7 @@ DeviceProcessEvents
 
 
 
-INCIDENT RESULT:
+INCIDENT RESULT  
 Sentinel detected the attack and triggered an incident.
 Defender XDR also flagged the VM with a security alert.
 
@@ -67,5 +65,5 @@ Analytics Rule w/ MITRE Tagging
 
 
 
-Summary
+Summary  
 This lab proves kills in detection, hunting, and incident response using Microsoft’s security stack. 
