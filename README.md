@@ -17,7 +17,8 @@ PowerShell (Attack Simulation)
 
 
 
-ATTACK SIMULATED:
+ATTACK SIMULATED:  
+
 Disabled Defender, set persistence using obfuscated PowerShell:
 Set-MpPreference -DisableRealtimeMonitoring $true
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name "Updater" -Value "powershell.exe -w hidden -enc UwB0AGEAcgB0AC0AUwBsAGUAZQBwACAAMQA=" -Force
@@ -26,7 +27,8 @@ Set-MpPreference -DisableRealtimeMonitoring $false
 
 
 
-DETECTION — KQL ANALYTIC RULE:
+DETECTION— KQL ANALYTIC RULE:  
+
 DeviceProcessEvents
 | where FileName == "powershell.exe"
 | where ProcessCommandLine contains "Start-Sleep" or ProcessCommandLine contains "-enc"
